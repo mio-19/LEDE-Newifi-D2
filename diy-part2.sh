@@ -15,6 +15,8 @@
 
 rm -rf package/lean/luci-theme-argon
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+echo 'CONFIG_PACKAGE_luci-theme-argon=y' >> .config
+echo 'CONFIG_PACKAGE_luci-theme-material=y' >> .config
 
 git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/lean/
 echo 'CONFIG_PACKAGE_luci-app-openclash=y' >> .config
