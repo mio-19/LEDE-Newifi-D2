@@ -12,3 +12,13 @@
 
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+
+rm -rf package/lean/luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+
+git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/lean/
+echo 'CONFIG_PACKAGE_luci-app-openclash=y' >> .config
+
+git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner package/lean/
+echo 'CONFIG_PACKAGE_luci-app-nlbwmon=y' >> .config
+echo 'CONFIG_PACKAGE_luci-app-onliner=y' >> .config
