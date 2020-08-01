@@ -16,13 +16,13 @@
 rm -rf package/lean/luci-theme-argon
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
 echo 'CONFIG_PACKAGE_luci-theme-argon=y' >> .config
-echo 'CONFIG_PACKAGE_luci-theme-material=y' >> .config
+sed -i '/^CONFIG_PACKAGE_luci-theme-bootstrap=y$/d' .config
 
-git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/lean/
-echo 'CONFIG_PACKAGE_luci-app-openclash=y' >> .config
+#git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/lean/
+#echo 'CONFIG_PACKAGE_luci-app-openclash=y' >> .config
 
 git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner package/lean/
-echo 'CONFIG_PACKAGE_luci-app-nlbwmon=y' >> .config
+#echo 'CONFIG_PACKAGE_luci-app-nlbwmon=y' >> .config # already in .config
 echo 'CONFIG_PACKAGE_luci-app-onliner=y' >> .config
 
 git clone --depth=1 https://github.com/rufengsuixing/luci-app-adguardhome package/lean/
@@ -43,4 +43,13 @@ CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
+EOF
+
+pushd package/lean
+svn co https://github.com/openwrt/packages/trunk/net/https-dns-proxy
+svn co https://github.com/openwrt/luci/trunk/applications/luci-app-https-dns-proxy
+popd
+cat << 'EOF' >> .config
+CONFIG_PACKAGE_https-dns-proxy=y
+CONFIG_PACKAGE_luci-app-https-dns-proxy=y
 EOF
