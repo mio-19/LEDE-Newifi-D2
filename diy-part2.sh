@@ -54,7 +54,6 @@ EOF
 
 rm -fr feeds/packages/net/https-dns-proxy
 svn co https://github.com/openwrt/packages/trunk/net/https-dns-proxy feeds/packages/net/https-dns-proxy
-svn co https://github.com/openwrt/luci/trunk/applications/luci-app-https-dns-proxy feeds/luci/applications/luci-app-https-dns-proxy
 cat << 'EOF' >> .config
 CONFIG_PACKAGE_https-dns-proxy=y
 CONFIG_PACKAGE_luci-app-https-dns-proxy=y
