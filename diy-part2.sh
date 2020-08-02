@@ -20,7 +20,7 @@ mv NEW.config .config
 cp .config ORIGIN_FOR_DIFF.config
 
 rm -rf package/lean/luci-theme-argon
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+git clone -b 18.06 --depth=1 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
 echo 'CONFIG_PACKAGE_luci-theme-argon=y' >> .config
 sed -i '/^CONFIG_PACKAGE_luci-theme-bootstrap=y$/d' .config
 
