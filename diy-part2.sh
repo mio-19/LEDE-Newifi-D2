@@ -14,6 +14,9 @@ set -e
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
+cat .config | sed '/^#/d; /^$/d' | sort > NEW.config
+mv NEW.config .config
+
 cp .config ORIGIN_FOR_DIFF.config
 
 rm -rf package/lean/luci-theme-argon
@@ -64,6 +67,9 @@ cat << 'EOF' >> .config
 CONFIG_STRIP_KERNEL_EXPORTS=y
 CONFIG_USE_MKLIBS=y
 EOF
+
+cat .config | sed '/^#/d; /^$/d' | sort > NEW.config
+mv NEW.config .config
 
 diff ORIGIN_FOR_DIFF.config .config
 rm ORIGIN_FOR_DIFF.config
