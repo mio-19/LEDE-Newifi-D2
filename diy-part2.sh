@@ -14,6 +14,8 @@ set -e
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
+cp .config ORIGIN_FOR_DIFF.config
+
 rm -rf package/lean/luci-theme-argon
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
 echo 'CONFIG_PACKAGE_luci-theme-argon=y' >> .config
@@ -53,3 +55,15 @@ cat << 'EOF' >> .config
 CONFIG_PACKAGE_https-dns-proxy=y
 CONFIG_PACKAGE_luci-app-https-dns-proxy=y
 EOF
+
+# https://forum.openwrt.org/t/discussion-about-what-can-be-removed-disabled-shrunk-in-images/19146
+for x in CONFIG_KERNEL_CRASHLOG CONFIG_KERNEL_SWAP CONFIG_KERNEL_KALLSYMS CONFIG_KERNEL_DEBUG_KERNEL CONFIG_KERNEL_DEBUG_INFO CONFIG_KERNEL_COREDUMP CONFIG_KERNEL_ELF_CORE ;do
+  sed -i 's/^'"$x"'=y$/d' .config
+done
+cat << 'EOF' >> .config
+CONFIG_STRIP_KERNEL_EXPORTS=y
+CONFIG_USE_MKLIBS=y
+EOF
+
+diff ORIGIN_FOR_DIFF.config .config
+rm ORIGIN_FOR_DIFF.config
