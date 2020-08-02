@@ -71,5 +71,5 @@ EOF
 cat .config | sed '/^#/d; /^$/d' | sort > NEW.config
 mv NEW.config .config
 
-diff ORIGIN_FOR_DIFF.config .config
-rm ORIGIN_FOR_DIFF.config
+diff ORIGIN_FOR_DIFF.config .config || true
+rm ORIGIN_FOR_DIFF.config || true
