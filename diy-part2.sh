@@ -24,8 +24,8 @@ git clone -b 18.06 --depth=1 https://github.com/jerrykuku/luci-theme-argon.git p
 echo 'CONFIG_PACKAGE_luci-theme-argon=y' >> .config
 sed -i '/^CONFIG_PACKAGE_luci-theme-bootstrap=y$/d' .config
 
-#git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/lean/OpenClash
-#echo 'CONFIG_PACKAGE_luci-app-openclash=y' >> .config
+git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/lean/OpenClash
+echo 'CONFIG_PACKAGE_luci-app-openclash=y' >> .config
 
 git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner package/lean/luci-app-onliner
 #echo 'CONFIG_PACKAGE_luci-app-nlbwmon=y' >> .config # already in .config
