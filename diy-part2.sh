@@ -38,6 +38,8 @@ echo 'CONFIG_PACKAGE_luci-app-aria2=y' >> .config
 
 echo 'CONFIG_PACKAGE_luci-app-ttyd=y' >> .config
 
+echo 'CONFIG_PACKAGE_iptables-mod-filter=y' >> .config
+
 cat << 'EOF' >> .config
 CONFIG_PACKAGE_luci-app-ssr-plus=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
