@@ -62,8 +62,11 @@ CONFIG_PACKAGE_luci-app-https-dns-proxy=y
 EOF
 
 # https://forum.openwrt.org/t/discussion-about-what-can-be-removed-disabled-shrunk-in-images/19146
-for x in CONFIG_KERNEL_CRASHLOG CONFIG_KERNEL_SWAP CONFIG_KERNEL_KALLSYMS CONFIG_KERNEL_DEBUG_KERNEL CONFIG_KERNEL_DEBUG_INFO CONFIG_KERNEL_COREDUMP CONFIG_KERNEL_ELF_CORE ;do
+# https://openwrt.org/docs/guide-user/additional-software/saving_space
+for x in CONFIG_DEFAULT_opkg CONFIG_PACKAGE_opkg \
+  CONFIG_KERNEL_PRINTK CONFIG_KERNEL_CRASHLOG CONFIG_KERNEL_SWAP CONFIG_KERNEL_KALLSYMS CONFIG_KERNEL_DEBUG_KERNEL CONFIG_KERNEL_DEBUG_INFO CONFIG_KERNEL_COREDUMP CONFIG_KERNEL_ELF_CORE ;do
   sed -i '/^'"$x"'=y$/d' .config
+  echo "$x=n" >> .config
 done
 cat << 'EOF' >> .config
 CONFIG_STRIP_KERNEL_EXPORTS=y
